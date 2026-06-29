@@ -1,5 +1,7 @@
 # solana-actions-blinks-skill
 
+[![CI](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml)
+
 Production-grade AI skill for **Solana Actions** and **Blockchain Links (Blinks)** — spec-compliant shareable on-chain links with real SDK code, live Jupiter API integration, and copy-paste Next.js templates.
 
 Built for the [Superteam Brasil · Solana AI Kit bounty](https://superteam.fun/earn/listing/skills).  
@@ -171,7 +173,7 @@ const payload = await createPostResponse({
 ## Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/solana-actions-blinks-skill.git
+git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
 cd solana-actions-blinks-skill
 ./install.sh -y
 ```
