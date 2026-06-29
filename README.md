@@ -91,12 +91,15 @@ Full submission checklist: [SUBMISSION.md](SUBMISSION.md)
 |----------|------|
 | **Action API** | https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol |
 | **dial.to blink** | [Open blink on dial.to](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) |
-| **Blinks Inspector** | Paste Action URL at [blinks.xyz/inspector](https://www.blinks.xyz/inspector) |
+| **Blinks Inspector** | Paste Action URL at [blinks.xyz/inspector](https://www.blinks.xyz/inspector) — if Inspector is down, test the same Action via the [dial.to blink](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) link below |
 | **Inspector proof** | ![Inspector screenshot](assets/inspector-screenshot.png) |
 | **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
 
+**Signing:** Set Phantom (or your wallet) to **Solana devnet** before approving the transfer.
+
 ```bash
 curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'
+curl -s https://solana-actions-blinks-demo-nine.vercel.app/actions.json | jq .
 ```
 
 Deploy your own: [demo/README.md](demo/README.md)
@@ -359,7 +362,7 @@ cp templates/actions.json           your-app/public/actions.json
 # 4. Test GET
 curl -s http://localhost:3000/api/actions/transfer-sol | jq '.links.actions[].label'
 
-# 5. Test in Inspector → https://www.blinks.xyz/inspector
+# 5. Test in Inspector → https://www.blinks.xyz/inspector (or open your dial.to link if Inspector is unavailable)
 ```
 
 ---

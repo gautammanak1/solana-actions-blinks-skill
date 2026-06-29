@@ -26,7 +26,7 @@ Checklist aligned with [Superteam Brasil · Solana AI Kit bounty](https://supert
 
 **Evidence:**
 - 6 action-type skills (tip, SPL, swap, mint, vote, sign-in)
-- Live devnet demo: https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol
+- Live devnet demo: https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol (Phantom on **devnet** for signing)
 - Copy-paste templates from [official solana-actions repo](https://github.com/solana-developers/solana-actions)
 
 ### 2. Novelty — genuine ecosystem gap?
@@ -94,6 +94,7 @@ cd solana-actions-blinks-skill
 **Live demo / proof:**  
 - Action: https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol  
 - dial.to: https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol  
+- Inspector: https://www.blinks.xyz/inspector (fallback: dial.to link above if Inspector is down)  
 - Release: v1.0.0
 
 **Novelty vs existing submissions:**  

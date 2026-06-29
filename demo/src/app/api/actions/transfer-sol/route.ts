@@ -5,6 +5,7 @@ import {
   ActionPostRequest,
   createActionHeaders,
   ActionError,
+  LinkedAction,
 } from "@solana/actions";
 import {
   clusterApiUrl,
@@ -33,16 +34,16 @@ export const GET = async (req: Request) => {
     const payload: ActionGetResponse = {
       type: "action",
       title: "solana-actions-blinks-skill — Tip Jar",
-      icon: new URL("/icon.svg", requestUrl.origin).toString(),
+      icon: new URL("/icon.png", requestUrl.origin).toString(),
       description: "Devnet demo: send SOL via Solana Action blink. Built with @solana/actions.",
       label: "Transfer",
       links: {
         actions: [
-          { type: "transaction", label: "Tip 0.01 SOL", href: `${baseHref}&amount=0.01` },
-          { type: "transaction", label: "Tip 0.1 SOL", href: `${baseHref}&amount=0.1` },
-          { type: "transaction", label: "Tip 1 SOL", href: `${baseHref}&amount=1` },
+          { type: "action", label: "Tip 0.01 SOL", href: `${baseHref}&amount=0.01` },
+          { type: "action", label: "Tip 0.1 SOL", href: `${baseHref}&amount=0.1` },
+          { type: "action", label: "Tip 1 SOL", href: `${baseHref}&amount=1` },
           {
-            type: "transaction",
+            type: "action",
             label: "Custom Tip",
             href: `${baseHref}&amount={amount}`,
             parameters: [
@@ -56,7 +57,7 @@ export const GET = async (req: Request) => {
               },
             ],
           },
-        ],
+        ] as unknown as LinkedAction[],
       },
     };
 

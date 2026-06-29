@@ -12,6 +12,7 @@ import {
   createActionHeaders,
   createPostResponse,
   ActionError,
+  LinkedAction,
 } from "@solana/actions";
 import { Connection, PublicKey, VersionedTransaction } from "@solana/web3.js";
 
@@ -34,9 +35,9 @@ export const GET = async (req: Request) => {
     label: "Swap",
     links: {
       actions: [
-        { type: "transaction", label: "Swap $10", href: `${base}?amount=10&slippageBps=50` },
+        { type: "action", label: "Swap $10", href: `${base}?amount=10&slippageBps=50` },
         {
-          type: "transaction",
+          type: "action",
           label: "Custom",
           href: `${base}?amount={amount}&slippageBps={slippage}`,
           parameters: [
@@ -54,7 +55,7 @@ export const GET = async (req: Request) => {
             },
           ],
         },
-      ],
+      ] as unknown as LinkedAction[],
     },
   };
   return Response.json(payload, { headers });
