@@ -10,6 +10,37 @@ user-invocable: true
 
 ## What This Skill Is For
 
+Use this skill when the user asks for:
+
+### Actions API Development
+- Solana Action GET endpoints (metadata, labels, linked actions, parameters)
+- Solana Action POST endpoints (signable transactions or messages)
+- OPTIONS / CORS preflight for blink clients
+- `actions.json` domain mapping (website URL → Action API URL)
+- `solana-action:` URL scheme and blink URL construction
+
+### Blinks (Blockchain Links)
+- Shareable blink URLs for X/Twitter, Discord, QR codes, websites
+- dial.to interstitial links and Dialect registry for social unfurl
+- Blinks Inspector testing workflow
+
+### Integration & Examples
+- Next.js App Router Action routes (`app/api/actions/...`)
+- Tip jar, Jupiter swap, NFT mint, governance vote blinks
+- Message signing and multi-step action chains
+
+### Security & Production
+- Signer validation, input sanitization, rate limiting
+- Disabled states and ActionError responses
+- Devnet testing before mainnet
+
+### NOT in scope (delegate to solana-dev-skill)
+- Anchor / Pinocchio program development
+- General transaction landing / debugging skills
+- Non-Actions Solana Pay QR flows
+
+### Quick module map
+
 | Use case | Skill module |
 |----------|--------------|
 | SOL tip / donation blink | [tip-jar.md](tip-jar.md) |
@@ -148,12 +179,23 @@ Don't load everything. Pick the row from the table above.
 
 ## Agents
 
-| Agent | Purpose |
-|-------|---------|
-| **actions-architect** | Design endpoint layout, security, actions.json |
-| **blink-engineer** | Implement routes, pass Inspector |
+| Agent | Model | Purpose |
+|-------|-------|---------|
+| **actions-architect** | opus | Design endpoints, actions.json, security model |
+| **blink-engineer** | sonnet | Implement routes, pass Blinks Inspector |
 
 See [agents/](../agents/) directory.
+
+---
+
+## Install
+
+```bash
+./install.sh -y          # standard — Cursor + Claude
+./install-custom.sh      # choose personal / project / single IDE
+```
+
+Repo: https://github.com/gautammanak1/solana-actions-blinks-skill
 
 ---
 

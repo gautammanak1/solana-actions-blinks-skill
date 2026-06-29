@@ -12,9 +12,76 @@ A Claude Code / Cursor skill for building **Solana Actions** and **Blockchain Li
 
 > **Extends**: [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) (optional — for Anchor programs & core security)
 
-Built for the [Superteam Brasil · Solana AI Kit bounty](https://superteam.fun/earn/listing/skills).  
-Reference structure: [solana-game-skill](https://github.com/solanabr/solana-game-skill).  
-**Latest release:** [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) · See [CHANGELOG.md](CHANGELOG.md)
+---
+
+## Problem
+
+Builders want users to **tip, swap, mint, or vote from a shareable link** (X/Twitter, Discord, QR, website button) — without sending users to a full dApp first.
+
+Solana **Actions + Blinks** solve this, but implementation spans:
+- HTTP GET / POST / OPTIONS + CORS preflight
+- `actions.json` domain mapping
+- `@solana/actions` SDK (`createActionHeaders`, `createPostResponse`)
+- Jupiter quotes, Metaplex mints, Realms votes
+- Blinks Inspector, dial.to, Dialect registry
+- Security (signer validation, hardcoded treasury/mints)
+
+Official docs are spread across multiple repos. Agents often ship broken CORS, wrong POST shapes, or placeholder APIs.
+
+---
+
+## Solution
+
+**solana-actions-blinks-skill** gives coding agents a **progressive, token-efficient playbook**:
+
+| What you get | Details |
+|--------------|---------|
+| **6 action-type modules** | Tip, SPL, Jupiter swap, NFT mint, DAO vote, sign-in |
+| **7 infrastructure modules** | Spec, builder, actions.json, security, Next.js, testing |
+| **Real reference data** | Mints, RPC URLs, Jupiter API curl examples |
+| **Working templates** | Copy-paste `route.ts` from [official solana-actions](https://github.com/solana-developers/solana-actions) |
+| **7 commands + 2 agents** | `/build-tip-action`, `/test-blink`, actions-architect, blink-engineer |
+| **CI/CD + v1.0.0 release** | Validated on every push |
+| **Live devnet demo** | Deployed Action on Vercel |
+
+**Entry point:** [skill/SKILL.md](skill/SKILL.md) — routes agents to the right module only when needed.
+
+---
+
+## Install
+
+```bash
+git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
+cd solana-actions-blinks-skill
+./install.sh -y
+```
+
+**Custom install** (choose Cursor vs Claude vs project path):
+
+```bash
+./install-custom.sh
+```
+
+**Installs to:**
+- Cursor → `~/.cursor/skills/solana-actions-blinks/`
+- Claude Code → `~/.claude/skills/solana-actions-blinks/`
+
+**Validate:**
+
+```bash
+npm install && npm run test:ci
+```
+
+### Install comparison
+
+| Feature | `install.sh` | `install-custom.sh` |
+|---------|--------------|---------------------|
+| Interactive prompts | Minimal (Y/n) | Full menu |
+| Location choice | Cursor + Claude | Personal / project / single IDE |
+| CLAUDE.md | Always to `~/.claude/` | Optional |
+| Best for | CI/CD, quick setup | Manual / project-local |
+
+Full submission checklist: [SUBMISSION.md](SUBMISSION.md)
 
 ---
 
@@ -388,13 +455,17 @@ Do **not** use deprecated `ACTIONS_CORS_HEADERS` or manual base64 serialization.
 
 ## Bounty Submission
 
-1. **Open PR** → [solanabr/skill-bounty](https://github.com/solanabr/skill-bounty)
-2. **Submit questionnaire** → [Superteam listing](https://superteam.fun/earn/listing/skills)
+| Item | Link |
+|------|------|
+| **Public repo** | https://github.com/gautammanak1/solana-actions-blinks-skill |
+| **skill-bounty PR** | https://github.com/solanabr/skill-bounty/pull/113 |
+| **Superteam listing** | https://superteam.fun/earn/listing/skills |
+| **Submission checklist** | [SUBMISSION.md](SUBMISSION.md) |
+| **SKILL.md entry point** | [skill/SKILL.md](skill/SKILL.md) |
+| **Reference kit shape** | [solana-game-skill](https://github.com/solanabr/solana-game-skill) |
+| **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
 
-PR title:
-```
-Submission: Add solana-actions-blinks-skill — Actions & Blinks with real SDK + Jupiter API
-```
+Built for [Superteam Brasil · Solana AI Kit bounty](https://superteam.fun/earn/listing/skills).
 
 ---
 

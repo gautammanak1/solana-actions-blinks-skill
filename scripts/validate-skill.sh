@@ -19,6 +19,8 @@ REQUIRED_FILES=(
   "README.md"
   "LICENSE"
   "install.sh"
+  "install-custom.sh"
+  "SUBMISSION.md"
   "assets/banner.png"
   "CLAUDE.md"
   "skill/SKILL.md"
