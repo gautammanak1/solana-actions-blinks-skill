@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "pathPattern": "/tip",
+      "apiPath": "https://solana-actions-blinks-demo.vercel.app/api/actions/transfer-sol"
+    },
+    {
+      "pathPattern": "/",
+      "apiPath": "https://solana-actions-blinks-demo.vercel.app/api/actions/transfer-sol"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 # Solana Actions & Blinks Skill for Claude Code
 
 [![CI](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/gautammanak1/solana-actions-blinks-skill?label=skill)](https://github.com/gautammanak1/solana-actions-blinks-skill/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Solana](https://img.shields.io/badge/Solana-Actions-9945FF?logo=solana&logoColor=white)](https://solana.com/solutions/actions)
 [![Blinks](https://img.shields.io/badge/Blinks-Blockchain%20Links-14F195)](https://www.blinks.xyz/inspector)
@@ -12,7 +13,20 @@ A Claude Code / Cursor skill for building **Solana Actions** and **Blockchain Li
 > **Extends**: [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) (optional — for Anchor programs & core security)
 
 Built for the [Superteam Brasil · Solana AI Kit bounty](https://superteam.fun/earn/listing/skills).  
-Reference structure: [solana-game-skill](https://github.com/solanabr/solana-game-skill).
+Reference structure: [solana-game-skill](https://github.com/solanabr/solana-game-skill).  
+**Latest release:** [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) · See [CHANGELOG.md](CHANGELOG.md)
+
+---
+
+## Live demo (devnet)
+
+| Resource | Link |
+|----------|------|
+| Action API | Deploy via `demo/` → `/api/actions/transfer-sol` |
+| Blinks Inspector | https://www.blinks.xyz/inspector |
+| dial.to | `https://dial.to/?action=solana-action:<YOUR_HTTPS_ACTION_URL>` |
+
+Deploy instructions: [demo/README.md](demo/README.md)
 
 ---
 
