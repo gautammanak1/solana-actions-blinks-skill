@@ -22,11 +22,17 @@ Reference structure: [solana-game-skill](https://github.com/solanabr/solana-game
 
 | Resource | Link |
 |----------|------|
-| Action API | Deploy via `demo/` → `/api/actions/transfer-sol` |
-| Blinks Inspector | https://www.blinks.xyz/inspector |
-| dial.to | `https://dial.to/?action=solana-action:<YOUR_HTTPS_ACTION_URL>` |
+| **Action API** | https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol |
+| **dial.to blink** | [Open blink on dial.to](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) |
+| **Blinks Inspector** | Paste Action URL at [blinks.xyz/inspector](https://www.blinks.xyz/inspector) |
+| **Inspector proof** | ![Inspector screenshot](assets/inspector-screenshot.png) |
+| **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
 
-Deploy instructions: [demo/README.md](demo/README.md)
+```bash
+curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'
+```
+
+Deploy your own: [demo/README.md](demo/README.md)
 
 ---
 
