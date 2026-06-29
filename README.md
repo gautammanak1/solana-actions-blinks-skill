@@ -97,9 +97,9 @@ Full submission checklist: [SUBMISSION.md](SUBMISSION.md)
 | **dial.to blink** | [Open on dial.to](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) *(may 503 if Dialect pauses the site)* |
 | **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
 
-**How to test:** Open the **demo home** → connect Phantom on **devnet** → tip. Or curl the Action API below.
+**How to test:** Open the **demo home** → connect Phantom on **devnet** → click a tip button → approve. Or curl the Action API below.
 
-**Auto-deploy:** The Vercel project is linked to this repo with **Root Directory = `demo`**. Any push to `main` rebuilds and publishes production automatically — no manual `vercel --prod` needed.
+**Auto-deploy:** Vercel is linked to [this repo](https://github.com/gautammanak1/solana-actions-blinks-skill) with **Root Directory = `demo`**. Push to `main` → production rebuilds automatically.
 
 **Note:** `dial.to` and Blinks Inspector are third-party and have been unreliable; use the embedded blink on the demo page instead.
 
