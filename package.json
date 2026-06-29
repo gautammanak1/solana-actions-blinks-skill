@@ -1,0 +1,22 @@
+{
+  "name": "solana-actions-blinks-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production AI skill for Solana Actions and Blinks",
+  "license": "MIT",
+  "scripts": {
+    "validate": "bash scripts/validate-skill.sh",
+    "typecheck": "tsc --noEmit -p tsconfig.templates.json",
+    "lint:shell": "shellcheck install.sh scripts/validate-skill.sh",
+    "test:ci": "npm run validate && npm run typecheck"
+  },
+  "devDependencies": {
+    "@solana/actions": "^1.6.6",
+    "@solana/web3.js": "^1.98.0",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

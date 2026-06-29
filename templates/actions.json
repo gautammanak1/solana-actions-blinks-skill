@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {
+      "pathPattern": "/tip",
+      "apiPath": "https://YOUR_DOMAIN.com/api/actions/transfer-sol"
+    },
+    {
+      "pathPattern": "/tip-usdc",
+      "apiPath": "https://YOUR_DOMAIN.com/api/actions/transfer-usdc"
+    },
+    {
+      "pathPattern": "/swap",
+      "apiPath": "https://YOUR_DOMAIN.com/api/actions/swap/usdc-to-sol"
+    },
+    {
+      "pathPattern": "/mint",
+      "apiPath": "https://YOUR_DOMAIN.com/api/actions/mint"
+    },
+    {
+      "pathPattern": "/vote/*",
+      "apiPath": "https://YOUR_DOMAIN.com/api/actions/vote"
+    }
+  ]
+}
