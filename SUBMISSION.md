@@ -12,6 +12,7 @@ Checklist aligned with [Superteam Brasil · Solana AI Kit bounty](https://supert
 | **README** — what it does, problem, install | ✅ | [README.md](README.md) → Problem · Solution · Install |
 | **SKILL.md entry point** (kit structure) | ✅ | [skill/SKILL.md](skill/SKILL.md) |
 | **skill-bounty PR** | ✅ | https://github.com/solanabr/skill-bounty/pull/113 |
+| **skill-bounty issue** | ✅ | https://github.com/solanabr/skill-bounty/issues/115 |
 | **Superteam questionnaire** | ⏳ | Submit at https://superteam.fun/earn/listing/skills (answers below) |
 | **MIT license** | ✅ | [LICENSE](LICENSE) |
 | **Working install path** | ✅ | `./install.sh` · `./install-custom.sh` |
@@ -77,6 +78,9 @@ https://github.com/gautammanak1/solana-actions-blinks-skill
 
 **skill-bounty PR URL:**  
 https://github.com/solanabr/skill-bounty/pull/113
+
+**skill-bounty issue (proposal):**  
+https://github.com/solanabr/skill-bounty/issues/115
 
 **What does your skill do? (1–2 sentences)**  
 Teaches AI coding agents to build, secure, test, and ship Solana Actions and Blinks — spec-compliant tip, swap, mint, and vote links using `@solana/actions`, live Jupiter API, and copy-paste Next.js templates.
