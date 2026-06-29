@@ -19,6 +19,7 @@ REQUIRED_FILES=(
   "README.md"
   "LICENSE"
   "install.sh"
+  "assets/banner.png"
   "CLAUDE.md"
   "skill/SKILL.md"
   "package.json"

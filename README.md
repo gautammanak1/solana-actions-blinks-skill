@@ -1,388 +1,408 @@
-# solana-actions-blinks-skill
+# Solana Actions & Blinks Skill for Claude Code
 
 [![CI](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Solana](https://img.shields.io/badge/Solana-Actions-9945FF?logo=solana&logoColor=white)](https://solana.com/solutions/actions)
+[![Blinks](https://img.shields.io/badge/Blinks-Blockchain%20Links-14F195)](https://www.blinks.xyz/inspector)
 
-Production-grade AI skill for **Solana Actions** and **Blockchain Links (Blinks)** — spec-compliant shareable on-chain links with real SDK code, live Jupiter API integration, and copy-paste Next.js templates.
+![Solana Actions & Blinks Skill banner](assets/banner.png)
+
+A Claude Code / Cursor skill for building **Solana Actions** and **Blockchain Links (Blinks)** — shareable on-chain tip, swap, mint, and vote links with real `@solana/actions` SDK code and live Jupiter API integration.
+
+> **Extends**: [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) (optional — for Anchor programs & core security)
 
 Built for the [Superteam Brasil · Solana AI Kit bounty](https://superteam.fun/earn/listing/skills).  
-Reference structure: [solana-game-skill](https://github.com/solanabr/solana-game-skill).  
-License: [MIT](./LICENSE)
+Reference structure: [solana-game-skill](https://github.com/solanabr/solana-game-skill).
 
 ---
 
-## Table of contents
+## Tags
 
-1. [Problem & solution](#problem--solution)
-2. [Why this skill is unique](#why-this-skill-is-unique)
-3. [Skill modules (6 action types)](#skill-modules-6-action-types)
-4. [Infrastructure skills](#infrastructure-skills)
-5. [Reference data (real APIs)](#reference-data-real-apis)
-6. [Templates (working code)](#templates-working-code)
-7. [Commands (7 workflows)](#commands-7-workflows)
-8. [Agents (2 roles)](#agents-2-roles)
-9. [Install](#install)
-10. [Quick start](#quick-start)
-11. [Environment variables](#environment-variables)
-12. [Testing with Blinks Inspector](#testing-with-blinks-inspector)
-13. [CI/CD & infrastructure](#cicd--infrastructure)
-14. [Project structure](#project-structure)
-15. [Bounty submission](#bounty-submission)
-16. [Official resources](#official-resources)
+`solana-actions` · `blinks` · `blockchain-links` · `solana-pay` · `jupiter-api` · `claude-skill` · `claude-code-skills` · `cursor-skills` · `solana-ai-kit` · `nextjs` · `dial-to` · `blinks-inspector` · `metaplex` · `realms-governance` · `superteam-brazil`
 
 ---
 
-## Problem & solution
+## Overview
 
-**Problem:** Solana Actions let builders ship tip, swap, mint, and vote flows as shareable links (Blinks). The spec spans HTTP GET/POST/OPTIONS, CORS, `actions.json`, Jupiter quotes, and wallet signing — docs are spread across multiple repos.
+This skill is an **addon** for the Solana AI Kit. It teaches coding agents how to ship spec-compliant Action endpoints (GET / POST / OPTIONS), `actions.json` domain mapping, and shareable blink URLs — while delegating Anchor program work to `solana-dev-skill`.
 
-**Solution:** This skill gives coding agents a **progressive playbook** with:
-- One skill file per action type (not generic fluff)
-- Real `@solana/actions` SDK patterns (`createActionHeaders`, `createPostResponse`)
-- Copy-paste TypeScript templates from the [official solana-actions repo](https://github.com/solana-developers/solana-actions)
-- Live Jupiter API v1 endpoints (`api.jup.ag/swap/v1`)
-- CI/CD so structure and templates never break silently
-
----
-
-## Why this skill is unique
-
-| Feature | This skill | Typical bounty submissions |
-|---------|-----------|----------------------------|
-| Niche | **Actions & Blinks** — zero duplicates in 110+ skill-bounty PRs | tx-doctor, auditor, legal (saturated) |
-| SDK | Official `createActionHeaders()` + `createPostResponse()` | Hand-rolled CORS / base64 |
-| Templates | Working `route.ts` files | Pseudocode markdown only |
-| APIs | Jupiter `api.jup.ag`, Helius RPC, Realms | Placeholder URLs |
-| Coverage | 6 action types + sign-in | Single generic guide |
-| Tooling | 7 commands, 2 agents, CI pipeline | None |
-| Kit fit | Matches solana-game-skill shape | Inconsistent structure |
-
----
-
-## Skill modules (6 action types)
-
-Each module is a **standalone skill file** — agents load only what they need (token-efficient).
-
-| # | Module | File | Builds |
-|---|--------|------|--------|
-| 1 | **SOL tip jar** | [skill/tip-jar.md](skill/tip-jar.md) | Native SOL transfer blink (official transfer-sol pattern) |
-| 2 | **SPL / USDC tip** | [skill/spl-transfer.md](skill/spl-transfer.md) | USDC SPL transfer with ATA creation |
-| 3 | **Jupiter swap** | [skill/jupiter-swap.md](skill/jupiter-swap.md) | Live USDC→SOL swap via `api.jup.ag/swap/v1` |
-| 4 | **NFT mint** | [skill/nft-mint.md](skill/nft-mint.md) | Metaplex Candy Machine / Core mint blink |
-| 5 | **DAO vote** | [skill/governance-vote.md](skill/governance-vote.md) | Realms Yes / No / Abstain linked actions |
-| 6 | **Message sign-in** | [skill/message-sign.md](skill/message-sign.md) | Wallet auth + multi-step action chains |
-
-**Entry point:** [skill/SKILL.md](skill/SKILL.md) — routing table + build checklist.
-
----
-
-## Infrastructure skills
-
-| Module | File | Purpose |
-|--------|------|---------|
-| Spec reference | [skill/actions-spec.md](skill/actions-spec.md) | GET/POST bodies, parameters, lifecycle |
-| Endpoint builder | [skill/blink-builder.md](skill/blink-builder.md) | Linked actions, blink URLs, query params |
-| Domain mapping | [skill/actions-json.md](skill/actions-json.md) | `actions.json` rules + CORS |
-| Security | [skill/callback-security.md](skill/callback-security.md) | Signer validation, rate limits, abuse |
-| Next.js deploy | [skill/nextjs-integration.md](skill/nextjs-integration.md) | App Router, Vercel, tunnels |
-| QA & registry | [skill/testing-debugging.md](skill/testing-debugging.md) | Blinks Inspector, dial.to, Dialect |
-| Links index | [skill/resources.md](skill/resources.md) | All official URLs |
-
----
-
-## Reference data (real APIs)
-
-| Reference | File | Contains |
-|-----------|------|----------|
-| Constants | [skill/reference/constants.md](skill/reference/constants.md) | RPC URLs, USDC/SOL mints, program IDs, devnet test wallet |
-| SDK API | [skill/reference/sdk-api.md](skill/reference/sdk-api.md) | `createActionHeaders`, `createPostResponse`, types |
-| Jupiter API | [skill/reference/jupiter-api.md](skill/reference/jupiter-api.md) | Quote/swap curl + TypeScript helpers |
-
-### Real mint addresses (mainnet)
-
-| Token | Mint |
-|-------|------|
-| SOL (wrapped) | `So11111111111111111111111111111111111111112` |
-| USDC | `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` |
-
-### Real Jupiter quote (curl)
-
-```bash
-curl -sG "https://api.jup.ag/swap/v1/quote" \
-  -H "x-api-key: YOUR_JUPITER_API_KEY" \
-  --data-urlencode "inputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" \
-  --data-urlencode "outputMint=So11111111111111111111111111111111111111112" \
-  --data-urlencode "amount=1000000" \
-  --data-urlencode "slippageBps=50" | jq '{inAmount, outAmount, priceImpactPct}'
 ```
-
-API key (free): https://portal.jup.ag
-
----
-
-## Templates (working code)
-
-Copy into your Next.js app — no rewriting from scratch.
-
-| Template | File | Source |
-|----------|------|--------|
-| SOL transfer Action | [templates/transfer-sol-route.ts](templates/transfer-sol-route.ts) | [official transfer-sol](https://github.com/solana-developers/solana-actions/blob/main/examples/next-js/src/app/api/actions/transfer-sol/route.ts) |
-| Constants | [templates/transfer-sol-const.ts](templates/transfer-sol-const.ts) | Official devnet test recipient |
-| Jupiter swap Action | [templates/jupiter-swap-route.ts](templates/jupiter-swap-route.ts) | `api.jup.ag/swap/v1` integration |
-| Domain mapping | [templates/actions.json](templates/actions.json) | All action path rules |
-| Environment | [templates/env.example](templates/env.example) | `SOLANA_RPC`, `JUPITER_API_KEY`, etc. |
-
-### SDK pattern (required in all templates)
-
-```typescript
-import { createActionHeaders, createPostResponse } from "@solana/actions";
-
-const headers = createActionHeaders();
-
-export const OPTIONS = async () => Response.json(null, { headers });
-
-const payload = await createPostResponse({
-  fields: { transaction, message: "Preview text" },
-});
+┌──────────────────────────────────────────────────────────────────┐
+│              solana-actions-blinks-skill (addon)                 │
+│                                                                  │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │  Action Type Skills (6)                                    │  │
+│  │  ├── SOL Tip Jar (transfer-sol pattern)                    │  │
+│  │  ├── SPL / USDC Transfer                                   │  │
+│  │  ├── Jupiter Swap (api.jup.ag/swap/v1)                     │  │
+│  │  ├── NFT Mint (Metaplex CM / Core)                         │  │
+│  │  ├── DAO Vote (Realms Yes / No / Abstain)                  │  │
+│  │  └── Message Sign-In (action chaining)                     │  │
+│  └────────────────────────────────────────────────────────────┘  │
+│                              │                                   │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │  Infrastructure Skills                                     │  │
+│  │  ├── Spec (GET/POST, CORS, parameters)                     │  │
+│  │  ├── actions.json domain mapping                           │  │
+│  │  ├── Security (signer, rate limits)                        │  │
+│  │  ├── Next.js integration + deploy                          │  │
+│  │  └── Blinks Inspector + Dialect registry                   │  │
+│  └────────────────────────────────────────────────────────────┘  │
+│                              │                                   │
+│                              ▼ references (optional)             │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │  solana-dev-skill (core)                                   │  │
+│  │  ├── Programs (Anchor, Pinocchio)                          │  │
+│  │  ├── Testing (LiteSVM, Mollusk, Surfpool)                    │  │
+│  │  └── Security (program + client checklists)                  │  │
+│  └────────────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Commands (7 workflows)
+## What's Included
 
-| Command | File | Use when |
-|---------|------|----------|
-| `/build-tip-action` | [commands/build-tip-action.md](commands/build-tip-action.md) | Scaffold SOL tip jar |
-| `/build-swap-action` | [commands/build-swap-action.md](commands/build-swap-action.md) | Scaffold Jupiter swap blink |
-| `/build-mint-action` | [commands/build-mint-action.md](commands/build-mint-action.md) | Scaffold NFT mint blink |
-| `/build-vote-action` | [commands/build-vote-action.md](commands/build-vote-action.md) | Scaffold Realms vote blink |
-| `/test-blink` | [commands/test-blink.md](commands/test-blink.md) | curl + Inspector QA checklist |
-| `/register-dialect` | [commands/register-dialect.md](commands/register-dialect.md) | X/Twitter unfurl registry |
-| `/scaffold-blink` | [commands/scaffold-blink.md](commands/scaffold-blink.md) | Generic Action scaffold |
+### Action Type Skills (This Addon)
+
+| Skill | Description |
+|-------|-------------|
+| [tip-jar.md](skill/tip-jar.md) | SOL tip jar — official [transfer-sol](https://github.com/solana-developers/solana-actions) pattern |
+| [spl-transfer.md](skill/spl-transfer.md) | USDC / SPL token tips with ATA creation |
+| [jupiter-swap.md](skill/jupiter-swap.md) | Live Jupiter swap blink (`api.jup.ag/swap/v1`) |
+| [nft-mint.md](skill/nft-mint.md) | Metaplex Candy Machine / Core mint blink |
+| [governance-vote.md](skill/governance-vote.md) | Realms DAO vote — Yes / No / Abstain |
+| [message-sign.md](skill/message-sign.md) | Wallet sign-in + multi-step action chains |
+
+### Infrastructure Skills
+
+| Skill | Description |
+|-------|-------------|
+| [actions-spec.md](skill/actions-spec.md) | Full Actions spec — GET/POST bodies, parameters, lifecycle |
+| [blink-builder.md](skill/blink-builder.md) | Endpoint patterns, linked actions, blink URLs |
+| [actions-json.md](skill/actions-json.md) | Domain root `actions.json` mapping + CORS |
+| [callback-security.md](skill/callback-security.md) | Signer validation, input sanitization, rate limits |
+| [nextjs-integration.md](skill/nextjs-integration.md) | Next.js App Router, Vercel, Cloudflare tunnels |
+| [testing-debugging.md](skill/testing-debugging.md) | [Blinks Inspector](https://www.blinks.xyz/inspector), [dial.to](https://dial.to), Dialect registry |
+| [resources.md](skill/resources.md) | Curated official links |
+
+### Reference Data (Real APIs)
+
+| Reference | Description |
+|-----------|-------------|
+| [reference/constants.md](skill/reference/constants.md) | RPC URLs, USDC/SOL mints, program IDs |
+| [reference/sdk-api.md](skill/reference/sdk-api.md) | `createActionHeaders`, `createPostResponse` |
+| [reference/jupiter-api.md](skill/reference/jupiter-api.md) | Jupiter quote/swap curl + TypeScript |
+
+### Working Templates
+
+| Template | Description |
+|----------|-------------|
+| [templates/transfer-sol-route.ts](templates/transfer-sol-route.ts) | Official solana-actions SOL transfer handler |
+| [templates/jupiter-swap-route.ts](templates/jupiter-swap-route.ts) | Jupiter USDC→SOL swap handler |
+| [templates/actions.json](templates/actions.json) | Domain mapping for all action types |
+| [templates/env.example](templates/env.example) | `SOLANA_RPC`, `JUPITER_API_KEY`, etc. |
 
 ---
 
-## Agents (2 roles)
+## Installation
 
-| Agent | File | Model | Role |
-|-------|------|-------|------|
-| **actions-architect** | [agents/actions-architect.md](agents/actions-architect.md) | opus | Design endpoints, actions.json, security model |
-| **blink-engineer** | [agents/blink-engineer.md](agents/blink-engineer.md) | sonnet | Implement routes, pass Inspector |
+### Standard Install (Recommended)
 
----
-
-## Install
+For scripts, CI/CD, or quick setup with defaults:
 
 ```bash
 git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
 cd solana-actions-blinks-skill
-./install.sh -y
+./install.sh        # Interactive
+./install.sh -y     # Non-interactive, all defaults
 ```
 
-**Install targets:**
+**Standard defaults:**
 - Cursor → `~/.cursor/skills/solana-actions-blinks/`
 - Claude Code → `~/.claude/skills/solana-actions-blinks/`
+- Bundles: `skill/`, `commands/`, `agents/`, `templates/`
+- Copies `CLAUDE.md` to `~/.claude/`
 
-Each install includes: `skill/`, `commands/`, `agents/`, `templates/`.
+### If You Already Have solana-dev-skill
+
+This skill **extends** the core dev skill for program work. Install this addon on top — it does not replace `solana-dev-skill`.
 
 ---
 
-## Quick start
+## Default Stack (June 2026)
 
-### 1. Install skill
+### Actions API
+
+| Layer | Choice |
+|-------|--------|
+| SDK | `@solana/actions` 1.6+ |
+| Headers | `createActionHeaders()` |
+| POST response | `createPostResponse()` |
+| RPC env var | `SOLANA_RPC` |
+| Spec | [Solana Actions guide](https://solana.com/developers/guides/advanced/actions) |
+
+### Swap Actions
+
+| Layer | Choice |
+|-------|--------|
+| API | `https://api.jup.ag/swap/v1` |
+| Auth | `x-api-key` from [portal.jup.ag](https://portal.jup.ag) |
+| Tx type | `VersionedTransaction` |
+
+### Web Frontends
+
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 15 (App Router) |
+| Routes | `src/app/api/actions/<name>/route.ts` |
+| Domain map | `public/actions.json` |
+| Deploy | Vercel + HTTPS required |
+
+### Testing
+
+| Tool | URL |
+|------|-----|
+| Blinks Inspector | https://www.blinks.xyz/inspector |
+| dial.to interstitial | https://dial.to |
+| Dialect registry | https://dial.to/register |
+
+---
+
+## Agents
+
+| Agent | Model | Purpose |
+|-------|-------|---------|
+| **actions-architect** | opus | Design endpoints, actions.json, security model |
+| **blink-engineer** | sonnet | Implement routes, pass Inspector QA |
+
+See [agents/](agents/) directory.
+
+---
+
+## Commands
+
+| Command | Purpose |
+|---------|---------|
+| **/build-tip-action** | Scaffold SOL tip jar Action |
+| **/build-swap-action** | Scaffold Jupiter swap blink |
+| **/build-mint-action** | Scaffold NFT mint blink |
+| **/build-vote-action** | Scaffold Realms vote blink |
+| **/test-blink** | curl + Blinks Inspector QA checklist |
+| **/register-dialect** | X/Twitter unfurl registry steps |
+| **/scaffold-blink** | Generic Action scaffold |
+
+See [commands/](commands/) directory.
+
+---
+
+## Usage Examples
+
+Copy-paste these prompts into Claude Code or Cursor after installing the skill.
+
+### SOL Tip Jar
+
+```
+"Build a devnet SOL tip jar Action with GET/POST/OPTIONS using createActionHeaders"
+"Scaffold transfer-sol route with preset amounts 0.01, 0.1, 1 SOL and custom input"
+"Add actions.json mapping /tip to my Action API endpoint"
+```
+
+### USDC / SPL Tips
+
+```
+"Create a USDC tip blink with SPL transfer and ATA creation on devnet"
+"Secure my SPL Action — hardcode treasury, validate balance server-side"
+```
+
+### Jupiter Swap
+
+```
+"Build a Jupiter USDC→SOL swap blink using api.jup.ag/swap/v1"
+"Add slippage selector (0.5%, 1%, 3%) and simulate tx before returning"
+```
+
+### NFT Mint
+
+```
+"Scaffold an NFT mint blink for my Metaplex collection with live supply in GET"
+"Return disabled state when mint is sold out or window closed"
+```
+
+### DAO Governance
+
+```
+"Create a Realms vote blink with Vote Yes, Vote No, and Abstain buttons"
+"Check on-chain proposal state and disable buttons when voting closes"
+```
+
+### Security & Testing
+
+```
+"Secure my Action POST endpoint against wrong signers and replay attacks"
+"Run /test-blink on my deployed Action URL with curl and Inspector steps"
+"Generate a dial.to share link for my tip jar Action"
+```
+
+### Program Development (via core skill)
+
+```
+"Create an Anchor program for my mint Action backend"
+"Set up LiteSVM tests for my on-chain vote program"
+```
+
+---
+
+## Quick Start
 
 ```bash
+# 1. Install skill
+git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
+cd solana-actions-blinks-skill
 ./install.sh -y
-```
 
-### 2. Ask your agent
+# 2. Validate locally
+npm install && npm run test:ci
 
-```
-/build-tip-action — scaffold SOL tip jar on Next.js 15 devnet
-```
-
-### 3. Copy template
-
-```bash
+# 3. Copy template into your Next.js app
 cp templates/transfer-sol-route.ts  your-app/src/app/api/actions/transfer-sol/route.ts
 cp templates/transfer-sol-const.ts  your-app/src/app/api/actions/transfer-sol/const.ts
 cp templates/actions.json           your-app/public/actions.json
-cp templates/env.example            your-app/.env.local
-```
 
-### 4. Test locally
-
-```bash
+# 4. Test GET
 curl -s http://localhost:3000/api/actions/transfer-sol | jq '.links.actions[].label'
-```
 
-### 5. Test in Inspector
-
-Open https://www.blinks.xyz/inspector → paste your Action URL.
-
-### 6. Share blink
-
-```
-https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fyourdomain.com%2Fapi%2Factions%2Ftransfer-sol
+# 5. Test in Inspector → https://www.blinks.xyz/inspector
 ```
 
 ---
 
-## Environment variables
+## Environment Variables
 
 | Variable | Required for | Example |
 |----------|--------------|---------|
 | `SOLANA_RPC` | All actions | `https://devnet.helius-rpc.com/?api-key=...` |
 | `TREASURY_WALLET` | Tip / transfer | Your base58 pubkey |
 | `NEXT_PUBLIC_SITE_URL` | Icon URLs | `https://yourdomain.com` |
-| `JUPITER_API_KEY` | Swap actions | From https://portal.jup.ag |
+| `JUPITER_API_KEY` | Swap actions | From [portal.jup.ag](https://portal.jup.ag) |
 | `USDC_MINT` | SPL transfer | Devnet: `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU` |
-| `COLLECTION_MINT` | NFT mint | Your collection pubkey |
-| `CANDY_MACHINE` | NFT mint | Your CM pubkey |
-| `PROPOSAL_ID` | DAO vote | Realms proposal pubkey |
 
 Full list: [templates/env.example](templates/env.example)
 
 ---
 
-## Testing with Blinks Inspector
+## CI/CD & Infrastructure
 
-| Step | Action |
-|------|--------|
-| 1 | Deploy Action to HTTPS (Vercel / Cloudflare tunnel) |
-| 2 | Open https://www.blinks.xyz/inspector |
-| 3 | Paste Action URL |
-| 4 | Verify GET metadata + linked buttons |
-| 5 | POST with devnet wallet pubkey |
-| 6 | Sign in Phantom (devnet mode) |
-| 7 | Confirm on https://explorer.solana.com/?cluster=devnet |
-
-Full QA script: [commands/test-blink.md](commands/test-blink.md)
-
----
-
-## CI/CD & infrastructure
-
-Every push runs automated checks so the skill never ships broken.
-
-### Pipeline (GitHub Actions)
-
-File: [.github/workflows/ci.yml](.github/workflows/ci.yml)
+Every push runs automated checks — skill structure and templates never break silently.
 
 ```
-┌─────────────────────┐
-│  push / pull_request │
-└──────────┬──────────┘
-           │
-     ┌─────┴─────┬─────────────┐
-     ▼           ▼             ▼
- validate-   typecheck-    install-
- structure   templates     smoke-test
-     │           │             │
-     └─────┬─────┴─────────────┘
-           ▼
-        ci-gate ✓
+push / PR → validate-structure → typecheck-templates → install-smoke-test → ci-gate ✓
 ```
 
-| Job | What it checks |
-|-----|----------------|
-| **validate-structure** | Required files, SKILL.md frontmatter, SDK patterns, JSON validity, ShellCheck |
-| **typecheck-templates** | `tsc --noEmit` on `templates/*.ts` with `@solana/actions` types |
-| **install-smoke-test** | `./install.sh -y` + verify files land in skills directory |
-| **ci-gate** | All jobs must pass |
+| Job | Checks |
+|-----|--------|
+| **validate-structure** | Required files, SKILL.md frontmatter, SDK patterns, ShellCheck |
+| **typecheck-templates** | `tsc --noEmit` on `templates/*.ts` |
+| **install-smoke-test** | `./install.sh -y` + verify skill installed |
 
-### Run locally
+Run locally:
 
 ```bash
-npm install
-npm run test:ci          # validate + typecheck
+npm install && npm run test:ci
 bash scripts/validate-skill.sh
-./install.sh -y
 ```
 
-### Validation script
-
-[scripts/validate-skill.sh](scripts/validate-skill.sh) checks:
-- 35+ required files exist
-- 6 skill modules + 3 reference files
-- 7+ commands, 2 agents
-- `createActionHeaders` / `createPostResponse` in templates
-- Real Jupiter API URL in swap template
-- No deprecated `ACTIONS_CORS_HEADERS`
-- `actions.json` valid JSON
-- SKILL.md internal links resolve
+Pipeline: [.github/workflows/ci.yml](.github/workflows/ci.yml)
 
 ---
 
-## Project structure
+## Repository Structure
 
 ```
 solana-actions-blinks-skill/
-├── .github/workflows/ci.yml     # CI/CD pipeline
-├── scripts/validate-skill.sh      # Local + CI validation
-├── skill/
-│   ├── SKILL.md                   # Entry point + routing
-│   ├── tip-jar.md                 # Action type skills (6)
-│   ├── spl-transfer.md
-│   ├── jupiter-swap.md
-│   ├── nft-mint.md
-│   ├── governance-vote.md
-│   ├── message-sign.md
-│   ├── actions-spec.md            # Infrastructure skills
-│   ├── blink-builder.md
-│   ├── actions-json.md
-│   ├── callback-security.md
-│   ├── nextjs-integration.md
-│   ├── testing-debugging.md
-│   ├── resources.md
-│   └── reference/                 # Real constants & APIs
-│       ├── constants.md
-│       ├── sdk-api.md
-│       └── jupiter-api.md
-├── templates/                     # Copy-paste route handlers
-├── commands/                      # 7 agent commands
-├── agents/                        # 2 specialized agents
-├── install.sh
+├── assets/banner.png              # README banner
+├── CLAUDE.md                      # Claude configuration
+├── README.md                      # This file
+├── install.sh                     # Standard installer
 ├── package.json                   # Template typecheck deps
-├── tsconfig.templates.json
-├── CLAUDE.md
-├── LICENSE
-└── README.md
+│
+├── skill/                         # Skill modules
+│   ├── SKILL.md                  # Entry point + routing
+│   ├── tip-jar.md                # Action type skills (6)
+│   ├── jupiter-swap.md
+│   ├── ...
+│   └── reference/                # Real constants & APIs
+│
+├── templates/                     # Copy-paste route handlers
+├── commands/                      # 7 workflow commands
+├── agents/                        # actions-architect + blink-engineer
+├── scripts/validate-skill.sh      # CI validation script
+└── .github/workflows/ci.yml       # CI/CD pipeline
 ```
 
 ---
 
-## Bounty submission
+## Development Workflow
 
-1. **Star & fork** this repo
-2. **Open PR** → [solanabr/skill-bounty](https://github.com/solanabr/skill-bounty)
-3. **Submit questionnaire** → [Superteam listing](https://superteam.fun/earn/listing/skills)
-4. Include: repo link, Inspector screenshot, CI badge
+### Two-Strike Rule
 
-PR title suggestion:
+If a build, Inspector test, or typecheck fails twice on the same issue:
+
+1. The agent will **STOP** immediately
+2. Present error output and the attempted fix
+3. Ask for user guidance
+
+### Required SDK Patterns
+
+Agents must use official SDK helpers — never hand-roll:
+
+```typescript
+import { createActionHeaders, createPostResponse } from "@solana/actions";
+const headers = createActionHeaders();
+const payload = await createPostResponse({ fields: { transaction, message } });
+```
+
+Do **not** use deprecated `ACTIONS_CORS_HEADERS` or manual base64 serialization.
+
+---
+
+## Bounty Submission
+
+1. **Open PR** → [solanabr/skill-bounty](https://github.com/solanabr/skill-bounty)
+2. **Submit questionnaire** → [Superteam listing](https://superteam.fun/earn/listing/skills)
+
+PR title:
 ```
 Submission: Add solana-actions-blinks-skill — Actions & Blinks with real SDK + Jupiter API
 ```
 
 ---
 
-## Official resources
+## Related
 
-| Resource | URL |
-|----------|-----|
-| Solana Actions guide | https://solana.com/developers/guides/advanced/actions |
-| solana-actions SDK repo | https://github.com/solana-developers/solana-actions |
-| transfer-sol example | https://github.com/solana-developers/solana-actions/blob/main/examples/next-js/src/app/api/actions/transfer-sol/route.ts |
-| Blinks Inspector | https://www.blinks.xyz/inspector |
-| dial.to | https://dial.to |
-| Dialect registry | https://dial.to/register |
-| Jupiter docs | https://station.jup.ag/docs |
-| Solana AI Kit | https://github.com/solanabr/solana-ai-kit |
-| Reference skill shape | https://github.com/solanabr/solana-game-skill |
-| Skill bounty | https://github.com/solanabr/skill-bounty |
-| Superteam bounty | https://superteam.fun/earn/listing/skills |
+- [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) — Core Solana development
+- [solana-game-skill](https://github.com/solanabr/solana-game-skill) — Reference kit skill structure
+- [solana-ai-kit](https://github.com/solanabr/solana-ai-kit) — Solana AI Kit hub
+- [solana-actions SDK](https://github.com/solana-developers/solana-actions) — Official Actions examples
+- [Solana Actions guide](https://solana.com/developers/guides/advanced/actions) — Spec documentation
+
+---
+
+## Contributing
+
+Contributions welcome! Please ensure updates reflect current Solana Actions ecosystem best practices.
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feat/my-feature-30-06-2026`
+3. Run `npm run test:ci` before submitting
+4. Open a pull request
 
 ---
 
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+Submission for [Superteam Brazil · Solana AI Kit Bounty](https://superteam.fun/earn/listing/skills)
