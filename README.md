@@ -87,15 +87,21 @@ Full submission checklist: [SUBMISSION.md](SUBMISSION.md)
 
 ## Live demo (devnet)
 
+[![Live Demo](https://img.shields.io/badge/demo-live-14F195?style=for-the-badge&logo=vercel&logoColor=white)](https://solana-actions-blinks-demo-nine.vercel.app)
+
 | Resource | Link |
 |----------|------|
+| **Demo home (embedded blink)** | https://solana-actions-blinks-demo-nine.vercel.app |
 | **Action API** | https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol |
-| **dial.to blink** | [Open blink on dial.to](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) |
-| **Blinks Inspector** | Paste Action URL at [blinks.xyz/inspector](https://www.blinks.xyz/inspector) — if Inspector is down, test the same Action via the [dial.to blink](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) link below |
-| **Inspector proof** | ![Inspector screenshot](assets/inspector-screenshot.png) |
+| **GitHub → Vercel** | Push to `main` auto-deploys the `demo/` app ([project](https://vercel.com/selfselectionboard/solana-actions-blinks-demo)) |
+| **dial.to blink** | [Open on dial.to](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) *(may 503 if Dialect pauses the site)* |
 | **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
 
-**Signing:** Set Phantom (or your wallet) to **Solana devnet** before approving the transfer.
+**How to test:** Open the **demo home** → connect Phantom on **devnet** → tip. Or curl the Action API below.
+
+**Auto-deploy:** The Vercel project is linked to this repo with **Root Directory = `demo`**. Any push to `main` rebuilds and publishes production automatically — no manual `vercel --prod` needed.
+
+**Note:** `dial.to` and Blinks Inspector are third-party and have been unreliable; use the embedded blink on the demo page instead.
 
 ```bash
 curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'

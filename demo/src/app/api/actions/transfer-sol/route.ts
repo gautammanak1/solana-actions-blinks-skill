@@ -39,11 +39,11 @@ export const GET = async (req: Request) => {
       label: "Transfer",
       links: {
         actions: [
-          { type: "action", label: "Tip 0.01 SOL", href: `${baseHref}&amount=0.01` },
-          { type: "action", label: "Tip 0.1 SOL", href: `${baseHref}&amount=0.1` },
-          { type: "action", label: "Tip 1 SOL", href: `${baseHref}&amount=1` },
+          { type: "transaction", label: "Tip 0.01 SOL", href: `${baseHref}&amount=0.01` },
+          { type: "transaction", label: "Tip 0.1 SOL", href: `${baseHref}&amount=0.1` },
+          { type: "transaction", label: "Tip 1 SOL", href: `${baseHref}&amount=1` },
           {
-            type: "action",
+            type: "transaction",
             label: "Custom Tip",
             href: `${baseHref}&amount={amount}`,
             parameters: [
@@ -57,7 +57,7 @@ export const GET = async (req: Request) => {
               },
             ],
           },
-        ] as unknown as LinkedAction[],
+        ] satisfies LinkedAction[],
       },
     };
 

@@ -35,9 +35,9 @@ export const GET = async (req: Request) => {
     label: "Swap",
     links: {
       actions: [
-        { type: "action", label: "Swap $10", href: `${base}?amount=10&slippageBps=50` },
+        { type: "transaction", label: "Swap $10", href: `${base}?amount=10&slippageBps=50` },
         {
-          type: "action",
+          type: "transaction",
           label: "Custom",
           href: `${base}?amount={amount}&slippageBps={slippage}`,
           parameters: [
@@ -55,7 +55,7 @@ export const GET = async (req: Request) => {
             },
           ],
         },
-      ] as unknown as LinkedAction[],
+      ] satisfies LinkedAction[],
     },
   };
   return Response.json(payload, { headers });

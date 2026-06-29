@@ -80,7 +80,7 @@ interface ActionGetResponse {
 }
 
 interface LinkedAction {
-  type: "action" | "completed";
+  type: "transaction" | "message" | "post" | "external-link";
   href: string;        // absolute HTTPS URL for POST target
   label: string;
   parameters?: ActionParameter[];
