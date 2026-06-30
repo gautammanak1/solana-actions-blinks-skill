@@ -3,7 +3,19 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Transaction } from "@solana/web3.js";
+import { Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 
 const ACTION_PATH = "/api/actions/transfer-sol";
 const FALLBACK_ORIGIN = "https://solana-actions-blinks-demo-nine.vercel.app";
@@ -119,7 +131,7 @@ export function ActionBlink() {
         const message = err instanceof Error ? err.message : "Transaction failed";
         if (/simulation|reverted|unknown error/i.test(message)) {
           setError(
-            "Transaction simulation failed. Is Phantom set to Devnet (not Mainnet)? Get devnet SOL from faucet.solana.com, then retry.",
+            "Transaction simulation failed. Switch Phantom to Devnet, fund from faucet.solana.com, then retry.",
           );
         } else {
           setError(message);
@@ -132,40 +144,56 @@ export function ActionBlink() {
   );
 
   return (
-    <div className="card card-accent">
-      <h2>Try the blink</h2>
-      <p>
-        Native Action client — talks directly to your GET/POST endpoints. No dial.to or Inspector
-        required. Use Phantom on <strong>devnet</strong>.
-      </p>
-      <div className="wallet-row">
-        <WalletMultiButton />
-      </div>
+    <Card className="mx-auto max-w-lg shadow-md">
+      <CardHeader className="gap-4">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <CardTitle>Tip jar</CardTitle>
+            <CardDescription className="mt-1.5">
+              Pick an amount and send SOL instantly.
+            </CardDescription>
+          </div>
+          <WalletMultiButton />
+        </div>
+      </CardHeader>
 
-      <div className="blink-shell">
+      <CardContent className="space-y-5">
         {loading ? (
-          <div className="loading">Loading action…</div>
+          <div className="text-muted-foreground flex items-center justify-center gap-2 py-10 text-sm">
+            <Loader2 className="size-4 animate-spin" />
+            Loading action…
+          </div>
         ) : error && !action ? (
-          <div className="loading error-text">{error}</div>
+          <p className="text-destructive py-6 text-center text-sm">{error}</p>
         ) : action ? (
-          <div className="tip-jar">
-            <div className="tip-jar-header">
-              <img src={action.icon} alt="" className="tip-jar-icon" width={48} height={48} />
-              <div>
-                <div className="tip-jar-title">{action.title}</div>
-                <div className="tip-jar-desc">{action.description}</div>
+          <>
+            <div className="flex items-center gap-4">
+              <img
+                src={action.icon}
+                alt=""
+                className="border-border size-12 rounded-xl border object-cover"
+                width={48}
+                height={48}
+              />
+              <div className="min-w-0">
+                <p className="font-medium leading-tight">{action.title}</p>
+                <p className="text-muted-foreground mt-1 text-sm">{action.description}</p>
               </div>
             </div>
 
-            <div className="tip-buttons">
+            <Separator />
+
+            <div className="grid gap-2.5">
               {linkedActions.map((item) => {
                 const param = item.parameters?.[0];
                 if (param) {
                   return (
-                    <div key={item.label} className="custom-tip">
-                      <label htmlFor="custom-amount">{param.label ?? "Amount (SOL)"}</label>
-                      <div className="custom-tip-row">
-                        <input
+                    <div key={item.label} className="space-y-2">
+                      <label htmlFor="custom-amount" className="text-muted-foreground text-sm">
+                        {param.label ?? "Amount (SOL)"}
+                      </label>
+                      <div className="grid grid-cols-[1fr_auto] gap-2">
+                        <Input
                           id="custom-amount"
                           type="number"
                           min={param.min ?? 0.001}
@@ -175,41 +203,47 @@ export function ActionBlink() {
                           onChange={(e) => setCustomAmount(e.target.value)}
                           disabled={busy}
                         />
-                        <button
+                        <Button
                           type="button"
-                          className="tip-btn"
                           disabled={!connected || busy}
                           onClick={() => executeTip(item.href, { [param.name]: customAmount })}
                         >
-                          {item.label}
-                        </button>
+                          {busy ? <Loader2 className="animate-spin" /> : item.label}
+                        </Button>
                       </div>
                     </div>
                   );
                 }
 
                 return (
-                  <button
+                  <Button
                     key={item.label}
                     type="button"
-                    className="tip-btn"
+                    variant="secondary"
+                    className="h-11 w-full"
                     disabled={!connected || busy}
                     onClick={() => executeTip(item.href)}
                   >
-                    {item.label}
-                  </button>
+                    {busy ? <Loader2 className="animate-spin" /> : item.label}
+                  </Button>
                 );
               })}
             </div>
 
             {!connected && (
-              <p className="hint">Connect wallet to enable tip buttons.</p>
+              <p className="text-muted-foreground text-center text-sm">
+                Connect your wallet to enable tipping.
+              </p>
             )}
-            {error && action && <p className="hint error-text">{error}</p>}
-            {status && <p className="hint success-text">{status}</p>}
-          </div>
+            {error && action && (
+              <p className="text-destructive text-center text-sm">{error}</p>
+            )}
+            {status && (
+              <p className="text-accent text-center text-sm break-all">{status}</p>
+            )}
+          </>
         ) : null}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

@@ -5,7 +5,6 @@ set -e
 
 CYAN='\033[0;36m'
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 WHITE='\033[1;37m'
 NC='\033[0m'
 
@@ -30,7 +29,7 @@ echo "2) Project only — ./.cursor/skills/ (this repo)"
 echo "3) Cursor only — ~/.cursor/skills/"
 echo "4) Claude only — ~/.claude/skills/"
 echo ""
-read -p "Choice [1-4] (default 1): " choice
+read -r -p "Choice [1-4] (default 1): " choice
 choice="${choice:-1}"
 
 case "$choice" in

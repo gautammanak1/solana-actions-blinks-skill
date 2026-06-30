@@ -1,23 +1,31 @@
 "use client";
 
+import { AlertCircle } from "lucide-react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
 export function DevnetBanner() {
   return (
-    <div className="devnet-banner" role="alert">
-      <strong>Devnet only</strong>
-      <p>
-        This demo builds transactions on <strong>Solana Devnet</strong>. If Phantom shows{" "}
-        <strong>Mainnet</strong>, the tip will fail with &quot;reverted during simulation&quot;.
-      </p>
-      <ol>
-        <li>Phantom → top-left network → switch to <strong>Devnet</strong></li>
-        <li>
-          Get test SOL:{" "}
-          <a href="https://faucet.solana.com/" target="_blank" rel="noreferrer">
+    <Alert variant="destructive" className="mx-auto max-w-5xl border-dashed">
+      <AlertCircle />
+      <AlertTitle>Use Devnet in your wallet</AlertTitle>
+      <AlertDescription>
+        <p>
+          Phantom must be on <strong>Devnet</strong>, not Mainnet — otherwise tips fail during
+          simulation.
+        </p>
+        <p className="mt-2">
+          Need SOL?{" "}
+          <a
+            href="https://faucet.solana.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium underline underline-offset-4"
+          >
             faucet.solana.com
           </a>
-        </li>
-        <li>Refresh this page → connect wallet → tip again</li>
-      </ol>
-    </div>
+        </p>
+      </AlertDescription>
+    </Alert>
   );
 }

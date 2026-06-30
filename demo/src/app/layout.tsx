@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
 import { WalletProviders } from "../components/WalletProviders";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+});
+
 export const metadata: Metadata = {
-  title: "Solana Actions & Blinks — Live Demo",
-  description: "Devnet SOL tip jar with embedded blink client. Auto-deployed from GitHub via Vercel.",
+  title: "Tip Jar — Solana Actions Demo",
+  description: "Send SOL tips on devnet with a clean, one-click Solana Action experience.",
   openGraph: {
-    title: "Solana Actions & Blinks Demo",
-    description: "Try a live devnet tip jar Action powered by @solana/actions.",
+    title: "Tip Jar — Solana Actions Demo",
+    description: "Connect wallet, pick an amount, confirm on Solana devnet.",
     url: "https://solana-actions-blinks-demo-nine.vercel.app",
   },
 };
@@ -19,16 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} font-sans`}>
         <WalletProviders>{children}</WalletProviders>
       </body>
     </html>
