@@ -106,6 +106,93 @@ Only Actions/Blinks-focused skill; no duplicate in 110+ skill-bounty PRs.
 
 ---
 
+## Superteam bounty form — copy-paste (full fields)
+
+### Link to Your Submission
+```
+https://github.com/gautammanak1/solana-actions-blinks-skill
+```
+
+*(Optional second link if form allows “Add a link”):*
+```
+https://github.com/solanabr/skill-bounty/pull/113
+```
+
+### Tweet Link
+Leave blank unless you have posted on X. Suggested post (then paste tweet URL):
+
+```
+Built solana-actions-blinks-skill for the @SuperteamBR Solana AI Kit bounty — teaches AI agents to ship Solana Actions & Blinks (tip, swap, mint, vote) with @solana/actions + live devnet demo.
+
+Repo: https://github.com/gautammanak1/solana-actions-blinks-skill
+Demo: https://solana-actions-blinks-demo-nine.vercel.app
+PR: https://github.com/solanabr/skill-bounty/pull/113
+```
+
+### Did you contribute towards existing repos or is it a new idea?
+```
+New idea. This is an original skill submission — not a patch to an existing repo.
+
+It is designed as an addon to the Solana AI Kit (same structure as solana-game-skill): new skill tree, templates, commands, agents, install scripts, CI, and a live devnet demo. Submitted via skill-bounty PR #113 and proposal issue #115.
+```
+
+### What is your closest "competing" skill?
+```
+solana-game-skill (structure/reference only — games vs Actions/Blinks)
+
+solana-dev-skill (complementary — programs/Anchor/security; this skill delegates program work there)
+
+There is no direct competitor in skill-bounty: among 110+ open PRs, none cover the Solana Actions spec, @solana/actions SDK, actions.json, blink URLs, Jupiter swap blinks, and end-to-end QA in one skill.
+```
+
+### Post any links/proofs that show why you should be the creator of this skill? (Founder market fit)
+```
+Primary repo (public, MIT, CI passing):
+https://github.com/gautammanak1/solana-actions-blinks-skill
+
+skill-bounty submission:
+https://github.com/solanabr/skill-bounty/pull/113
+
+Ecosystem proposal issue:
+https://github.com/solanabr/skill-bounty/issues/115
+
+Live devnet demo (embedded blink client — test with Phantom on devnet):
+https://solana-actions-blinks-demo-nine.vercel.app
+
+Action GET endpoint (spec-compliant JSON + CORS):
+https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol
+
+Release v1.0.0:
+https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0
+
+CI proof:
+https://github.com/gautammanak1/solana-actions-blinks-skill/actions
+
+Why me / why this should win:
+• First dedicated Actions & Blinks skill in the bounty — fills a real gap (shareable tip/swap/mint/vote links)
+• Production patterns: real @solana/actions SDK (createActionHeaders, createPostResponse), not hand-rolled HTTP
+• 6 action-type modules + 7 infra modules + Jupiter api.jup.ag/swap/v1 reference
+• Working copy-paste Next.js templates + deployable demo auto-deployed from GitHub → Vercel
+• Progressive SKILL.md routing (token-efficient for AI agents)
+• Matches official kit layout: install.sh, agents, commands, validate script, SUBMISSION.md
+
+Quick verify (anyone can run):
+curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'
+```
+
+### Anything Else?
+```
+Install (one command):
+git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git && cd solana-actions-blinks-skill && ./install.sh -y
+
+Skill entry point: skill/SKILL.md
+
+Note on testing: dial.to and blinks.xyz/inspector are often down (503 / parked domain). The demo page includes a native Action client that talks directly to GET/POST endpoints — recommended QA path for judges.
+
+Superteam questionnaire answers also documented in repo SUBMISSION.md.
+Thank you for reviewing!
+```
+
 ## Kit structure map
 
 ```
