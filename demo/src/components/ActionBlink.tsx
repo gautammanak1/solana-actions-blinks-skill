@@ -116,7 +116,14 @@ export function ActionBlink() {
 
         setStatus(`Sent! ${body.message ?? "Transaction confirmed."} Signature: ${signature.slice(0, 8)}…`);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Transaction failed");
+        const message = err instanceof Error ? err.message : "Transaction failed";
+        if (/simulation|reverted|unknown error/i.test(message)) {
+          setError(
+            "Transaction simulation failed. Is Phantom set to Devnet (not Mainnet)? Get devnet SOL from faucet.solana.com, then retry.",
+          );
+        } else {
+          setError(message);
+        }
       } finally {
         setBusy(false);
       }

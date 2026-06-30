@@ -1,5 +1,6 @@
 import { ActionBlink } from "../components/ActionBlink";
 import { CopyButton } from "../components/CopyButton";
+import { DevnetBanner } from "../components/DevnetBanner";
 
 const PRODUCTION_ORIGIN = "https://solana-actions-blinks-demo-nine.vercel.app";
 const ACTION_PATH = "/api/actions/transfer-sol";
@@ -12,6 +13,8 @@ export default function Home() {
 
   return (
     <main className="page">
+      <DevnetBanner />
+
       <header className="hero">
         <div className="hero-badge">
           <span className="hero-badge-dot" aria-hidden />
@@ -33,8 +36,8 @@ export default function Home() {
             <li>
               <span className="step-num">1</span>
               <div className="step-body">
-                <strong>Connect wallet</strong>
-                <span>Phantom or Solflare on devnet</span>
+                <strong>Switch Phantom to Devnet</strong>
+                <span>Settings → network → Devnet (not Mainnet)</span>
               </div>
             </li>
             <li>

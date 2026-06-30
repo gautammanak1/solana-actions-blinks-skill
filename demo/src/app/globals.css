@@ -396,3 +396,36 @@ code {
 .footer a {
   color: #c4b5fd;
 }
+
+.devnet-banner {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.devnet-banner strong {
+  color: #fca5a5;
+}
+
+.devnet-banner p {
+  margin: 0.45rem 0 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.devnet-banner ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.devnet-banner li {
+  margin-bottom: 0.35rem;
+}
+
+.devnet-banner a {
+  color: #fca5a5;
+}
