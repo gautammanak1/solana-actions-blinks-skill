@@ -46,7 +46,7 @@ Checklist aligned with [Superteam Brasil · Solana AI Kit bounty](https://supert
 | Real SDK | `createActionHeaders()` + `createPostResponse()` (not hand-rolled) |
 | Live API | Jupiter `api.jup.ag/swap/v1`, devnet RPC |
 | Versioned release | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
-| Inspector proof | [screenshot](assets/inspector-screenshot.png) + [PR comment](https://github.com/solanabr/skill-bounty/pull/113#issuecomment-4836995275) |
+| Live demo proof | [demo-screenshot.png](assets/demo-screenshot.png) · [demo URL](https://solana-actions-blinks-demo-nine.vercel.app) |
 
 ### 4. Fit — slots into standard kit?
 

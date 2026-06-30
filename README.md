@@ -126,6 +126,8 @@ curl -s http://localhost:3000/api/actions/transfer-sol | jq '.links.actions[].la
 
 **How to test:** Demo home → Phantom on **devnet** → tip. Or curl:
 
+![Live demo — tip jar blink UI](assets/demo-screenshot.png)
+
 ```bash
 curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'
 curl -s https://solana-actions-blinks-demo-nine.vercel.app/actions.json | jq .
