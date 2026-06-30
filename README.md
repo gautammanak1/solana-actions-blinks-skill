@@ -1,16 +1,137 @@
 # Solana Actions & Blinks Skill for Claude Code
 
 [![CI](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/gautammanak1/solana-actions-blinks-skill/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/gautammanak1/solana-actions-blinks-skill?label=skill)](https://github.com/gautammanak1/solana-actions-blinks-skill/releases)
+[![Release](https://img.shields.io/github/v/release/gautammanak1/solana-actions-blinks-skill?label=skill)](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Solana](https://img.shields.io/badge/Solana-Actions-9945FF?logo=solana&logoColor=white)](https://solana.com/solutions/actions)
-[![Blinks](https://img.shields.io/badge/Blinks-Blockchain%20Links-14F195)](https://www.blinks.xyz/inspector)
+[![Live Demo](https://img.shields.io/badge/demo-devnet-14F195?style=flat-square&logo=vercel&logoColor=white)](https://solana-actions-blinks-demo-nine.vercel.app)
+[![Solana Actions](https://img.shields.io/badge/Solana-Actions-9945FF?logo=solana&logoColor=white)](https://solana.com/solutions/actions)
 
 ![Solana Actions & Blinks Skill banner](assets/banner.png)
 
-A Claude Code / Cursor skill for building **Solana Actions** and **Blockchain Links (Blinks)** — shareable on-chain tip, swap, mint, and vote links with real `@solana/actions` SDK code and live Jupiter API integration.
+**Ship shareable on-chain links in minutes** — tip, swap, mint, and vote from X, Discord, or QR codes using spec-compliant **Solana Actions** and **Blockchain Links (Blinks)**.
 
-> **Extends**: [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) (optional — for Anchor programs & core security)
+Real [`@solana/actions`](https://github.com/solana-developers/solana-actions) SDK code · live [Jupiter API](https://api.jup.ag/swap/v1) · copy-paste Next.js templates · [live devnet demo](https://solana-actions-blinks-demo-nine.vercel.app)
+
+> **Addon skill** for the [Solana AI Kit](https://github.com/solanabr/solana-ai-kit) — extends [`solana-dev-skill`](https://github.com/solana-foundation/solana-dev-skill) (Anchor programs & core security stay in the core skill).
+
+**Entry point:** [skill/SKILL.md](skill/SKILL.md) · **Bounty PR:** [#113](https://github.com/solanabr/skill-bounty/pull/113)
+
+---
+
+## Why this Skill?
+
+Official Solana Actions documentation is excellent — but **spread across multiple repos**. AI coding agents routinely ship:
+
+- Broken CORS / missing `OPTIONS` handlers
+- Wrong POST response shapes (manual base64 instead of `createPostResponse`)
+- Placeholder Jupiter URLs instead of `api.jup.ag/swap/v1`
+- Client-controlled treasury addresses (security hole)
+
+**This skill is the missing playbook:** progressive modules, working templates, security checklists, and a **live demo judges can click** — so agents build **working blinks on the first try**.
+
+| Judging lens | What we deliver |
+|--------------|-----------------|
+| **Usefulness** | End-to-end tip / swap / mint / vote from shareable links |
+| **Novelty** | Only dedicated Actions/Blinks skill among 128+ [skill-bounty PRs](https://github.com/solanabr/skill-bounty/pulls) |
+| **Quality** | CI, typechecked templates, v1.0.0 release, deployable demo |
+| **Kit fit** | Same shape as [`solana-game-skill`](https://github.com/solanabr/solana-game-skill) |
+
+---
+
+## Who should use this?
+
+| You are… | Use this skill to… |
+|----------|-------------------|
+| **AI agent / Cursor / Claude Code user** | Scaffold spec-compliant Action routes without reading the entire spec |
+| **Full-stack Solana builder** | Add tip jars, swap buttons, or vote links without a full dApp |
+| **Hackathon team** | Copy templates → deploy → share a blink URL in under an hour |
+| **Kit maintainer** | Merge an addon that covers the official Actions distribution layer |
+| **Anchor developer** | Pair with `solana-dev-skill` — programs here, HTTP Actions here |
+
+**Not for:** Raw Anchor program development, MEV bots, or non-Actions Solana Pay QR flows → delegate to [`solana-dev-skill`](https://github.com/solana-foundation/solana-dev-skill).
+
+---
+
+## Official Docs vs This Skill
+
+| Topic | Official docs alone | **solana-actions-blinks-skill** |
+|-------|---------------------|----------------------------------|
+| **Spec & lifecycle** | [Solana Actions guide](https://solana.com/developers/guides/advanced/actions) | [actions-spec.md](skill/actions-spec.md) — agent-oriented summary + pitfalls |
+| **SDK usage** | GitHub examples | [sdk-api.md](skill/reference/sdk-api.md) + enforced `createActionHeaders` / `createPostResponse` in templates |
+| **CORS / OPTIONS** | Mentioned in spec | [callback-security.md](skill/callback-security.md) + checklist in SKILL.md |
+| **actions.json** | Spec section | [actions-json.md](skill/actions-json.md) + working [templates/actions.json](templates/actions.json) |
+| **Jupiter swap blinks** | Not in core Actions repo | [jupiter-swap.md](skill/jupiter-swap.md) + live `api.jup.ag/swap/v1` template |
+| **NFT / Realms / SPL** | Scattered examples | Dedicated modules: mint, vote, SPL transfer |
+| **Testing** | Inspector / dial.to docs | [testing-debugging.md](skill/testing-debugging.md) + `/test-blink` + **embedded demo UI** |
+| **Agent routing** | N/A | [SKILL.md](skill/SKILL.md) task table — load **one module per task** (token-efficient) |
+| **Copy-paste code** | Example repos | [templates/](templates/) typechecked in CI |
+| **Slash commands** | N/A | 7 commands: `/build-tip-action`, `/test-blink`, etc. |
+
+Docs teach the **what**. This skill teaches agents the **how** — with guardrails.
+
+---
+
+## Ecosystem Impact
+
+Solana Actions are the **distribution layer** for on-chain UX — links that unfurl into signable transactions on X, Discord, wallets, and QR codes ([Solana Actions overview](https://solana.com/solutions/actions)).
+
+Adding this skill to the AI Kit means:
+
+1. **Fewer broken blinks in the wild** — agents use official SDK helpers, not hand-rolled HTTP
+2. **Faster time-to-shareable-link** — templates + commands vs assembling docs from scratch
+3. **Safer callbacks** — signer validation, hardcoded treasuries, rate-limit patterns baked in
+4. **Composable kit** — Action HTTP layer here; Anchor programs in `solana-dev-skill`; games in `solana-game-skill`
+5. **Unique bounty niche** — 128+ submissions; **zero** other dedicated Actions/Blinks skills
+
+**Live proof:** [demo home](https://solana-actions-blinks-demo-nine.vercel.app) → Phantom on devnet → tip → confirmed on-chain.
+
+---
+
+## Quick Start
+
+```bash
+# 1. Install skill (Cursor + Claude Code)
+git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
+cd solana-actions-blinks-skill
+./install.sh -y
+
+# 2. Validate locally
+npm install && npm run test:ci
+
+# 3. Copy template into your Next.js app
+cp templates/transfer-sol-route.ts  your-app/src/app/api/actions/transfer-sol/route.ts
+cp templates/transfer-sol-const.ts  your-app/src/app/api/actions/transfer-sol/const.ts
+cp templates/actions.json           your-app/public/actions.json
+
+# 4. Test GET locally
+curl -s http://localhost:3000/api/actions/transfer-sol | jq '.links.actions[].label'
+
+# 5. Test end-to-end
+#    → Deploy, or use our live demo: https://solana-actions-blinks-demo-nine.vercel.app
+#    → Connect Phantom on devnet → tip
+#    → Or: /test-blink https://yourdomain.com/api/actions/transfer-sol
+```
+
+---
+
+## Live demo (devnet)
+
+| Resource | Link |
+|----------|------|
+| **Demo home (embedded blink)** | https://solana-actions-blinks-demo-nine.vercel.app |
+| **Action API** | https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol |
+| **Auto-deploy** | Push to `main` → Vercel rebuilds `demo/` ([project](https://vercel.com/selfselectionboard/solana-actions-blinks-demo)) |
+| **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
+| **dial.to** | [Open interstitial](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) *(may 503 — use demo home instead)* |
+
+**How to test:** Demo home → Phantom on **devnet** → tip. Or curl:
+
+```bash
+curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'
+curl -s https://solana-actions-blinks-demo-nine.vercel.app/actions.json | jq .
+```
+
+Deploy your own: [demo/README.md](demo/README.md)
 
 ---
 
@@ -19,6 +140,7 @@ A Claude Code / Cursor skill for building **Solana Actions** and **Blockchain Li
 Builders want users to **tip, swap, mint, or vote from a shareable link** (X/Twitter, Discord, QR, website button) — without sending users to a full dApp first.
 
 Solana **Actions + Blinks** solve this, but implementation spans:
+
 - HTTP GET / POST / OPTIONS + CORS preflight
 - `actions.json` domain mapping
 - `@solana/actions` SDK (`createActionHeaders`, `createPostResponse`)
@@ -41,38 +163,36 @@ Official docs are spread across multiple repos. Agents often ship broken CORS, w
 | **Real reference data** | Mints, RPC URLs, Jupiter API curl examples |
 | **Working templates** | Copy-paste `route.ts` from [official solana-actions](https://github.com/solana-developers/solana-actions) |
 | **7 commands + 2 agents** | `/build-tip-action`, `/test-blink`, actions-architect, blink-engineer |
-| **CI/CD + v1.0.0 release** | Validated on every push |
-| **Live devnet demo** | Deployed Action on Vercel |
-
-**Entry point:** [skill/SKILL.md](skill/SKILL.md) — routes agents to the right module only when needed.
+| **CI + v1.0.0 release** | Validated on every push |
+| **Live devnet demo** | Deployed Action on Vercel with native blink UI |
 
 ---
 
-## Install
+## Installation
+
+### Standard install (recommended)
 
 ```bash
 git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
 cd solana-actions-blinks-skill
-./install.sh -y
-```
-
-**Custom install** (choose Cursor vs Claude vs project path):
-
-```bash
-./install-custom.sh
+./install.sh        # Interactive
+./install.sh -y     # Non-interactive — CI / quick setup
 ```
 
 **Installs to:**
-- Cursor → `~/.cursor/skills/solana-actions-blinks/`
-- Claude Code → `~/.claude/skills/solana-actions-blinks/`
 
-**Validate:**
+| Target | Path |
+|--------|------|
+| Cursor | `~/.cursor/skills/solana-actions-blinks/` |
+| Claude Code | `~/.claude/skills/solana-actions-blinks/` |
+| Bundled | `skill/`, `commands/`, `agents/`, `templates/` |
+| Claude config | `CLAUDE.md` → `~/.claude/` |
+
+### Custom install
 
 ```bash
-npm install && npm run test:ci
+./install-custom.sh   # Personal / project / single IDE
 ```
-
-### Install comparison
 
 | Feature | `install.sh` | `install-custom.sh` |
 |---------|--------------|---------------------|
@@ -81,40 +201,18 @@ npm install && npm run test:ci
 | CLAUDE.md | Always to `~/.claude/` | Optional |
 | Best for | CI/CD, quick setup | Manual / project-local |
 
-Full submission checklist: [SUBMISSION.md](SUBMISSION.md)
-
----
-
-## Live demo (devnet)
-
-[![Live Demo](https://img.shields.io/badge/demo-live-14F195?style=for-the-badge&logo=vercel&logoColor=white)](https://solana-actions-blinks-demo-nine.vercel.app)
-
-| Resource | Link |
-|----------|------|
-| **Demo home (embedded blink)** | https://solana-actions-blinks-demo-nine.vercel.app |
-| **Action API** | https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol |
-| **GitHub → Vercel** | Push to `main` auto-deploys the `demo/` app ([project](https://vercel.com/selfselectionboard/solana-actions-blinks-demo)) |
-| **dial.to blink** | [Open on dial.to](https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Fsolana-actions-blinks-demo-nine.vercel.app%2Fapi%2Factions%2Ftransfer-sol) *(may 503 if Dialect pauses the site)* |
-| **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
-
-**How to test:** Open the **demo home** → connect Phantom on **devnet** → click a tip button → approve. Or curl the Action API below.
-
-**Auto-deploy:** Vercel is linked to [this repo](https://github.com/gautammanak1/solana-actions-blinks-skill) with **Root Directory = `demo`**. Push to `main` → production rebuilds automatically.
-
-**Note:** `dial.to` and Blinks Inspector are third-party and have been unreliable; use the embedded blink on the demo page instead.
+### Validate installation
 
 ```bash
-curl -s https://solana-actions-blinks-demo-nine.vercel.app/api/actions/transfer-sol | jq '.title, .links.actions[].label'
-curl -s https://solana-actions-blinks-demo-nine.vercel.app/actions.json | jq .
+npm install && npm run test:ci
+bash scripts/validate-skill.sh
 ```
 
-Deploy your own: [demo/README.md](demo/README.md)
+### If you already have solana-dev-skill
 
----
+This skill **extends** the core dev skill for program work. Install this addon on top — it does not replace `solana-dev-skill`.
 
-## Tags
-
-`solana-actions` · `blinks` · `blockchain-links` · `solana-pay` · `jupiter-api` · `claude-skill` · `claude-code-skills` · `cursor-skills` · `solana-ai-kit` · `nextjs` · `dial-to` · `blinks-inspector` · `metaplex` · `realms-governance` · `superteam-brazil`
+Full submission checklist: [SUBMISSION.md](SUBMISSION.md)
 
 ---
 
@@ -149,8 +247,8 @@ This skill is an **addon** for the Solana AI Kit. It teaches coding agents how t
 │  ┌────────────────────────────────────────────────────────────┐  │
 │  │  solana-dev-skill (core)                                   │  │
 │  │  ├── Programs (Anchor, Pinocchio)                          │  │
-│  │  ├── Testing (LiteSVM, Mollusk, Surfpool)                    │  │
-│  │  └── Security (program + client checklists)                  │  │
+│  │  ├── Testing (LiteSVM, Mollusk, Surfpool)                  │  │
+│  │  └── Security (program + client checklists)                │  │
 │  └────────────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────┘
 ```
@@ -179,7 +277,7 @@ This skill is an **addon** for the Solana AI Kit. It teaches coding agents how t
 | [actions-json.md](skill/actions-json.md) | Domain root `actions.json` mapping + CORS |
 | [callback-security.md](skill/callback-security.md) | Signer validation, input sanitization, rate limits |
 | [nextjs-integration.md](skill/nextjs-integration.md) | Next.js App Router, Vercel, Cloudflare tunnels |
-| [testing-debugging.md](skill/testing-debugging.md) | [Blinks Inspector](https://www.blinks.xyz/inspector), [dial.to](https://dial.to), Dialect registry |
+| [testing-debugging.md](skill/testing-debugging.md) | Demo UI, [Blinks Inspector](https://www.blinks.xyz/inspector), [dial.to](https://dial.to), Dialect registry |
 | [resources.md](skill/resources.md) | Curated official links |
 
 ### Reference Data (Real APIs)
@@ -198,31 +296,6 @@ This skill is an **addon** for the Solana AI Kit. It teaches coding agents how t
 | [templates/jupiter-swap-route.ts](templates/jupiter-swap-route.ts) | Jupiter USDC→SOL swap handler |
 | [templates/actions.json](templates/actions.json) | Domain mapping for all action types |
 | [templates/env.example](templates/env.example) | `SOLANA_RPC`, `JUPITER_API_KEY`, etc. |
-
----
-
-## Installation
-
-### Standard Install (Recommended)
-
-For scripts, CI/CD, or quick setup with defaults:
-
-```bash
-git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
-cd solana-actions-blinks-skill
-./install.sh        # Interactive
-./install.sh -y     # Non-interactive, all defaults
-```
-
-**Standard defaults:**
-- Cursor → `~/.cursor/skills/solana-actions-blinks/`
-- Claude Code → `~/.claude/skills/solana-actions-blinks/`
-- Bundles: `skill/`, `commands/`, `agents/`, `templates/`
-- Copies `CLAUDE.md` to `~/.claude/`
-
-### If You Already Have solana-dev-skill
-
-This skill **extends** the core dev skill for program work. Install this addon on top — it does not replace `solana-dev-skill`.
 
 ---
 
@@ -252,13 +325,14 @@ This skill **extends** the core dev skill for program work. Install this addon o
 |-------|--------|
 | Framework | Next.js 15 (App Router) |
 | Routes | `src/app/api/actions/<name>/route.ts` |
-| Domain map | `public/actions.json` |
+| Domain map | `public/actions.json` or dynamic route |
 | Deploy | Vercel + HTTPS required |
 
 ### Testing
 
 | Tool | URL |
 |------|-----|
+| **Embedded demo (recommended)** | https://solana-actions-blinks-demo-nine.vercel.app |
 | Blinks Inspector | https://www.blinks.xyz/inspector |
 | dial.to interstitial | https://dial.to |
 | Dialect registry | https://dial.to/register |
@@ -284,7 +358,7 @@ See [agents/](agents/) directory.
 | **/build-swap-action** | Scaffold Jupiter swap blink |
 | **/build-mint-action** | Scaffold NFT mint blink |
 | **/build-vote-action** | Scaffold Realms vote blink |
-| **/test-blink** | curl + Blinks Inspector QA checklist |
+| **/test-blink** | curl + demo / Inspector QA checklist |
 | **/register-dialect** | X/Twitter unfurl registry steps |
 | **/scaffold-blink** | Generic Action scaffold |
 
@@ -349,30 +423,6 @@ Copy-paste these prompts into Claude Code or Cursor after installing the skill.
 
 ---
 
-## Quick Start
-
-```bash
-# 1. Install skill
-git clone https://github.com/gautammanak1/solana-actions-blinks-skill.git
-cd solana-actions-blinks-skill
-./install.sh -y
-
-# 2. Validate locally
-npm install && npm run test:ci
-
-# 3. Copy template into your Next.js app
-cp templates/transfer-sol-route.ts  your-app/src/app/api/actions/transfer-sol/route.ts
-cp templates/transfer-sol-const.ts  your-app/src/app/api/actions/transfer-sol/const.ts
-cp templates/actions.json           your-app/public/actions.json
-
-# 4. Test GET
-curl -s http://localhost:3000/api/actions/transfer-sol | jq '.links.actions[].label'
-
-# 5. Test in Inspector → https://www.blinks.xyz/inspector (or open your dial.to link if Inspector is unavailable)
-```
-
----
-
 ## Environment Variables
 
 | Variable | Required for | Example |
@@ -392,7 +442,7 @@ Full list: [templates/env.example](templates/env.example)
 Every push runs automated checks — skill structure and templates never break silently.
 
 ```
-push / PR → validate-structure → typecheck-templates → install-smoke-test → ci-gate ✓
+push / PR → validate-structure → typecheck-templates → install-smoke-test → validate-demo → ci-gate ✓
 ```
 
 | Job | Checks |
@@ -400,6 +450,7 @@ push / PR → validate-structure → typecheck-templates → install-smoke-test 
 | **validate-structure** | Required files, SKILL.md frontmatter, SDK patterns, ShellCheck |
 | **typecheck-templates** | `tsc --noEmit` on `templates/*.ts` |
 | **install-smoke-test** | `./install.sh -y` + verify skill installed |
+| **validate-demo** | `npm run build` in `demo/` (Next.js Action app) |
 
 Run locally:
 
@@ -419,7 +470,9 @@ solana-actions-blinks-skill/
 ├── assets/banner.png              # README banner
 ├── CLAUDE.md                      # Claude configuration
 ├── README.md                      # This file
+├── SUBMISSION.md                  # Bounty checklist + form answers
 ├── install.sh                     # Standard installer
+├── install-custom.sh            # Custom installer
 ├── package.json                   # Template typecheck deps
 │
 ├── skill/                         # Skill modules
@@ -432,6 +485,7 @@ solana-actions-blinks-skill/
 ├── templates/                     # Copy-paste route handlers
 ├── commands/                      # 7 workflow commands
 ├── agents/                        # actions-architect + blink-engineer
+├── demo/                          # Live devnet Next.js app (Vercel)
 ├── scripts/validate-skill.sh      # CI validation script
 └── .github/workflows/ci.yml       # CI/CD pipeline
 ```
@@ -468,6 +522,7 @@ Do **not** use deprecated `ACTIONS_CORS_HEADERS` or manual base64 serialization.
 |------|------|
 | **Public repo** | https://github.com/gautammanak1/solana-actions-blinks-skill |
 | **skill-bounty PR** | https://github.com/solanabr/skill-bounty/pull/113 |
+| **skill-bounty issue** | https://github.com/solanabr/skill-bounty/issues/115 |
 | **Superteam listing** | https://superteam.fun/earn/listing/skills |
 | **Submission checklist** | [SUBMISSION.md](SUBMISSION.md) |
 | **SKILL.md entry point** | [skill/SKILL.md](skill/SKILL.md) |
@@ -475,6 +530,12 @@ Do **not** use deprecated `ACTIONS_CORS_HEADERS` or manual base64 serialization.
 | **Release** | [v1.0.0](https://github.com/gautammanak1/solana-actions-blinks-skill/releases/tag/v1.0.0) |
 
 Built for [Superteam Brasil · Solana AI Kit bounty](https://superteam.fun/earn/listing/skills).
+
+---
+
+## Tags
+
+`solana-actions` · `blinks` · `blockchain-links` · `solana-pay` · `jupiter-api` · `claude-skill` · `claude-code-skills` · `cursor-skills` · `solana-ai-kit` · `nextjs` · `dial-to` · `blinks-inspector` · `metaplex` · `realms-governance` · `superteam-brazil`
 
 ---
 

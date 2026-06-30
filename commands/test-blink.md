@@ -34,9 +34,11 @@ curl -sX POST "$ACTION_URL?amount=0.01" \
   -d '{"account":"DEVNET_WALLET"}' | jq '{type, message, transaction: .transaction[0:40]}'
 ```
 
-### 2. Blinks Inspector
+### 2. End-to-end QA
 
-Open https://www.blinks.xyz/inspector → paste Action URL
+**Recommended:** Open https://solana-actions-blinks-demo-nine.vercel.app (or your deployed demo) → Phantom on devnet → tip.
+
+**Optional:** Blinks Inspector — https://www.blinks.xyz/inspector → paste Action URL *(often redirects to parked page)*
 
 Check:
 - [ ] Icon loads (HTTPS PNG/SVG/WebP)

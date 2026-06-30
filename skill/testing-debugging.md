@@ -1,6 +1,14 @@
 # Testing, Debugging & Shipping Blinks
 
-## Blinks Inspector (primary tool)
+## Primary QA (recommended)
+
+**Live demo with embedded blink client:** [https://solana-actions-blinks-demo-nine.vercel.app](https://solana-actions-blinks-demo-nine.vercel.app)
+
+Works without dial.to or Blinks Inspector (both third-party tools are often down). Connect Phantom on **devnet** → tip → confirm on explorer.
+
+For your own deployment, replicate the same flow: GET metadata renders buttons → POST returns base64 tx → wallet signs.
+
+## Blinks Inspector
 
 URL: [https://www.blinks.xyz/inspector](https://www.blinks.xyz/inspector)
 
